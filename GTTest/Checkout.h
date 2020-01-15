@@ -20,6 +20,7 @@ protected:
 
 	std::map<std::string, int> prices;
 	std::map<std::string, Discount> discounts;
+	std::map<std::string, int> items;
 	int total;
 };
 
