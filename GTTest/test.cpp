@@ -24,3 +24,7 @@ TEST_F(CheckoutTests, CanGetTotalForMultipleItems) {
     int total = checkOut.calculateTotal();
     ASSERT_EQ(3, total);
 }
+
+TEST_F(CheckoutTests, CanAddDiscount) {
+    checkOut.addDiscount("a", 3, 2);
+}
