@@ -18,7 +18,10 @@ void Checkout::addItem(std::string item) {
 }
 
 void Checkout::addDiscount(std::string item, int nmbrOfItems, int discountPrice) {
-	;
+	Discount discount;
+	discount.nbrOfItems = nmbrOfItems;
+	discount.discountPrice = discountPrice;
+	discount[item] = discount;
 }
 
 int Checkout::calculateTotal() {

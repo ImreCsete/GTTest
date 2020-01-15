@@ -13,7 +13,13 @@ public:
 	int calculateTotal();
 
 protected:
+	struct Discount {
+		int nbrOfItems;
+		int discountPrice;
+	};
+
 	std::map<std::string, int> prices;
+	std::map<std::string, Discount> discounts;
 	int total;
 };
 
