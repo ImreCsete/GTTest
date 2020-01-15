@@ -9,6 +9,7 @@ public:
 	virtual ~Checkout();
 	void addItemPrice(std::string item, int price);
 	void addItem(std::string);
+	void addDiscount(std::string item, int nmbrOfItems, int discountPrice);
 	int calculateTotal();
 
 protected:
