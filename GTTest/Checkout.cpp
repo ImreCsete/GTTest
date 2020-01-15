@@ -31,24 +31,33 @@ int Checkout::calculateTotal() {
 		std::string item = itemIter->first;
 		int itemCnt = itemIter->second;
 
-		std::map<std::string, Discount>::iterator discountIter;
-		discountIter = discounts.find(item);
-		
-		if (discountIter != discounts.end()) {
-			Discount discount = discountIter->second;
-
-			if (itemCnt >= discount.nbrOfItems) {
-				int nbrOfDiscounts = itemCnt / discount.nbrOfItems;
-				total += nbrOfDiscounts * discount.discountPrice;
-				int remainingItems = itemCnt % discount.nbrOfItems;
-				total += remainingItems * prices[item];
-			} else {
-				total += itemCnt * prices[item];
-			}
-		} else {
-			total += itemCnt * prices[item];
-		}
+		calculateItem(item, itemCnt);
 	}
 
 	return total;
+}
+
+void Checkout::calculateItem(std::string item, int itemCnt) {
+	std::map<std::string, Discount>::iterator discountIter;
+	discountIter = discounts.find(item);
+
+	if (discountIter != discounts.end()) {
+		Discount discount = discountIter->second;
+		calculateDiscount(item, itemCnt, discount);
+	}
+	else {
+		total += itemCnt * prices[item];
+	}
+}
+
+void Checkout::calculateDiscount(std::string item, int itemCnt, Discount discount) {
+	if (itemCnt >= discount.nbrOfItems) {
+		int nbrOfDiscounts = itemCnt / discount.nbrOfItems;
+		total += nbrOfDiscounts * discount.discountPrice;
+		int remainingItems = itemCnt % discount.nbrOfItems;
+		total += remainingItems * prices[item];
+	}
+	else {
+		total += itemCnt * prices[item];
+	}
 }
